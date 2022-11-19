@@ -1,10 +1,10 @@
 import React from 'react';
 import { ButtonStyle } from './style'
 
-function Button() {
+function Button(props: any) {
   return (
     <ButtonStyle>
-      go home now
+      {props.children}
     </ButtonStyle>
   );
 }

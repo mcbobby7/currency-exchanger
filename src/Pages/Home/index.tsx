@@ -9,7 +9,6 @@ function App() {
   return (
     <Home>
       <div>ntn new for now</div>
-      <Button />
       <Input />
       <DropDown />
       <Card />

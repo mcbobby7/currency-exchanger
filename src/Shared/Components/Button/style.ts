@@ -7,11 +7,11 @@ export const ButtonStyle = styled.button`
     border: 0;
     border-radius: 6px;
     box-sizing: border-box;
-    color: #fff;
+    color: #1F2833;
     cursor: pointer;
     display: inline-flex;
     font-family: "JetBrains Mono",monospace;
-    height: 48px;
+    height: 40px;
     width: 100%;
     justify-content: center;
     line-height: 1;
@@ -26,7 +26,7 @@ export const ButtonStyle = styled.button`
     touch-action: manipulation;
     white-space: nowrap;
     will-change: box-shadow,transform;
-    font-size: 18px;
+    font-size: 14px;
 
     :hover {
     transform: translateY(-2px);
