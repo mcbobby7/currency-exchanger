@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-export const ButtonStyle = styled.button`
+export const ButtonStyle = styled.div`
+button{
     align-items: center;
     appearance: none;
     background-image: radial-gradient(100% 100% at 100% 0, #66FCF1 0, #45A29E 100%);
@@ -34,5 +35,12 @@ export const ButtonStyle = styled.button`
 
    :active {
     transform: translateY(2px);
+    }
+}
+    button:disabled,
+    button[disabled]{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
     }
 `;

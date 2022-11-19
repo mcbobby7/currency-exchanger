@@ -4,7 +4,8 @@ import { ButtonStyle } from './style'
 function Button(props: any) {
   return (
     <ButtonStyle>
-      {props.children}
+        <button disabled={props.disabled}>{props.children}</button>
+      
     </ButtonStyle>
   );
 }

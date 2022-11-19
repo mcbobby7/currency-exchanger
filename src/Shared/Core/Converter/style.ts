@@ -64,4 +64,10 @@ export const ConverterStyle = styled.div`
             margin: 0 20px;
         }
     }
+    .swap {
+        color: #45A29E;
+        font-size: 20px;
+        cursor: pointer;
+        font-weight: 700;
+    }
 `;

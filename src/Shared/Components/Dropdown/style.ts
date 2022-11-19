@@ -19,9 +19,14 @@ export const DropDownHeader = styled("div")`
   display: flex;
   align-items: center;
   padding-left: 20px;
+  position: relative;
 `;
 
-export const DropDownListContainer = styled("div")``;
+export const DropDownListContainer = styled("div")`
+    position: absolute;
+    width: 10.5em;
+    z-index: 2;
+`;
 
 export const DropDownList = styled("ul")`
   padding: 0;

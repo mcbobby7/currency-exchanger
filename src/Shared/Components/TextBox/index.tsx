@@ -1,11 +1,11 @@
 import React from 'react';
 import { InputStyle } from './style'
 
-function TextInput() {
+function TextInput(props: any) {
   return (
     <InputStyle>
-        <input type="text" id="input" className='input-text'  placeholder="Your first name, e.g. Nicholas" />
-        <label  className="Input-label">First name</label>
+        <input value={props.value} type={props.type} id="input" className='input-text'  placeholder={props.placeholder} onChange={(e) => props.onChange(e.target.value) } />
+        <label  className="Input-label">{props.label}</label>
     </InputStyle>
   );
 }

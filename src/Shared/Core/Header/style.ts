@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const HeaderStyle = styled.div`
 
-    width: 100vw;
     display: flex;
     flex-direction: row;
     align-items: center;

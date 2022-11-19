@@ -3,12 +3,12 @@ import { CardStyle } from './style'
 
 
 
-export default function DropDown() {
+export default function Card(props: any) {
 
   return (
     <CardStyle >
         <div className="container">
-            ntn yet
+            {props.name} {' '} ({props.sub})
         </div>
     </CardStyle>
   );

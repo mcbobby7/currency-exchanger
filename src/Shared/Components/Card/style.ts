@@ -11,5 +11,9 @@ export const CardStyle = styled.button`
 
     .container {
     padding: 2px 16px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     }
 `;
