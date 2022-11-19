@@ -3,6 +3,7 @@ import { Home } from './style'
 import Button from '../../Shared/Components/Button'
 import Input from '../../Shared/Components/TextBox'
 import DropDown from '../../Shared/Components/Dropdown'
+import Card from '../../Shared/Components/Card'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Button />
       <Input />
       <DropDown />
+      <Card />
     </Home>
   );
 }
