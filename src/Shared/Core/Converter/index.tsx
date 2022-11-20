@@ -26,7 +26,7 @@ export default function Converter(props: any) {
     const [records, setRecords] = useState([])
     const [disableForm, setDisableForm] = useState(false)
     const [symbols, setSymbols] = useState(['uar', 'mrx', 'hde', 'she', 'sha', 'USD', 'EUR'])
-    const [mainSymbols, setMainSymbols] = useState<any>({AED: "United Arab Emirates Dirham"})
+    const [mainSymbols, setMainSymbols] = useState<any>({})
                        
     const {fromCurrency, toCurrency, toAmount}= useParams()
 
@@ -109,6 +109,33 @@ export default function Converter(props: any) {
         }; 
     }
 
+    const setToF = (e: any) => {
+        if(toCurrency) {
+            if(e.target.value === from) {
+                return
+            }else {
+                setTo(e.target.value)
+                return
+            }
+        }
+
+        setTo(e.target.value)
+        if(e.target.value === from && e.target.value === symbols[0]) {
+            setFrom(symbols[1])
+        }else {
+            setFrom(symbols[0])            
+        }
+    }
+
+    const setFromF = (e: any) => {
+        setFrom(e.target.value)
+        if(e.target.value === to && e.target.value === symbols[0]) {
+            setTo(symbols[1])
+        }else {
+            setTo(symbols[0])
+        }
+    }
+
     useEffect(() => {   
                                 
         // convertCurrency()
@@ -127,7 +154,7 @@ export default function Converter(props: any) {
 
   return (
     <>
-    {fromCurrency ? <div style={{display: 'flex', flexDirection: 'row', justifyContent: "space-between", width: '100%'}}><div className='title'>{from} - <span style={{fontSize: '19px'}}>{mainSymbols['AED']}</span></div> <Link style={{textDecoration: 'none'}} to={`/`} ><Button>Back to Home</Button></Link></div> : <div className='title'>Currency Exchanger</div> }
+    {fromCurrency ? <div style={{display: 'flex', flexDirection: 'row', justifyContent: "space-between", width: '100%'}}><div className='title'>{from} - <span style={{fontSize: '19px'}}>{mainSymbols[from]}</span></div> <Link style={{textDecoration: 'none'}} to={`/`} ><Button>Back to Home</Button></Link></div> : <div className='title'>Currency Exchanger</div> }
 
     <ConverterStyle >        
         <div className="amount">
@@ -138,7 +165,7 @@ export default function Converter(props: any) {
             <div className="both">
                 <div>
                     <div className="label">From</div>
-                    <select onChange={(e) => setFrom(e.target.value)} value={from} disabled={disableForm}>
+                    <select onChange={(e) => setFromF(e)} value={from} disabled={disableForm} className="round">
                     {symbols.map((symbol: string) => (
                        <option key={symbol} value={symbol}>{symbol}</option>
                     ))}
@@ -147,7 +174,7 @@ export default function Converter(props: any) {
                 {!fromCurrency && <div className="swap" onClick={() => swap()}>Swap</div>}
                 <div>
                     <div className="label">To</div>
-                    <select onChange={(e) => setTo(e.target.value)} value={to} disabled={disableForm && !toCurrency}>
+                    <select onChange={(e) =>  setToF(e)} value={to} disabled={disableForm && !toCurrency} className="round" >
                         {symbols.map((symbol: string) => (
                         <option key={symbol} value={symbol}>{symbol}</option>
                         ))}
