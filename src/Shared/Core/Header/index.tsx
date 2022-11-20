@@ -16,8 +16,8 @@ export default function Header() {
         <div className="nav">
             <Link style={{textDecoration: 'none'}} to='/'><div className="logo"> <span className="logoC">C</span>on<span className="logoC">v</span>er<span className="logoC">t</span>er</div></Link>
             <div className="navs">
-                <Link style={{textDecoration: 'none'}} to='/details/EUR/USD'><Button>EUR-USD Details</Button></Link>
-                <Link style={{textDecoration: 'none'}} to='/details/EUR/GDB'><Button>EUR-GDB Details</Button></Link>
+                <Link style={{textDecoration: 'none'}} to='/details/EUR/USD/1'><Button>EUR-USD Details</Button></Link>
+                <Link style={{textDecoration: 'none'}} to='/details/EUR/GDB/1'><Button>EUR-GDB Details</Button></Link>
             </div>
         </div>
         

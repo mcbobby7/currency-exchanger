@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ConverterStyle } from './style'
 import Button from '../../Components/Button'
 import Input from '../../Components/TextBox'
-import Select from '../../Components/Dropdown'
 import { ApiService } from "../Services";
 import { take, map } from "rxjs/operators";
 import { Body } from "../../../Shared/Core/Utils/Types";
+import { Link, useParams } from 'react-router-dom';
 
 
 interface ConvertResponse {                         
@@ -26,6 +26,10 @@ export default function Converter(props: any) {
     const [records, setRecords] = useState([])
     const [disableForm, setDisableForm] = useState(false)
     const [symbols, setSymbols] = useState(['uar', 'mrx', 'hde', 'she', 'sha', 'USD', 'EUR'])
+    const [mainSymbols, setMainSymbols] = useState<any>({AED: "United Arab Emirates Dirham"})
+                       
+    const {fromCurrency, toCurrency, toAmount}= useParams()
+
     // https://api.apilayer.com/fixer/symbols
 
     const swap = () => {
@@ -65,6 +69,7 @@ export default function Converter(props: any) {
                 console.log(res);
                 
             if(res.success) {
+                setMainSymbols(res.symbols)
                 return Object.keys(res.symbols);                                 
                 } else {                                   
                 return [];                                 
@@ -104,16 +109,29 @@ export default function Converter(props: any) {
         }; 
     }
 
-    useEffect(() => {                           
+    useEffect(() => {   
+                                
         // convertCurrency()
         // getSymbols()                       
-        // getLatest()                    
-        }, []);
+        // getLatest() 
+        
+        console.log('from', fromCurrency, toCurrency);     
+        if(fromCurrency ||  toCurrency) {
+            setDisableForm(true)
+            setFrom(fromCurrency as string)
+            setTo(toCurrency as string)
+            setAmount(toAmount as unknown as number)
+        }  
+        
+        }, [fromCurrency, toCurrency, toAmount]);
 
   return (
-    <ConverterStyle >
+    <>
+    {fromCurrency ? <div style={{display: 'flex', flexDirection: 'row', justifyContent: "space-between", width: '100%'}}><div className='title'>{from} - <span style={{fontSize: '19px'}}>{mainSymbols['AED']}</span></div> <Link style={{textDecoration: 'none'}} to={`/`} ><Button>Back to Home</Button></Link></div> : <div className='title'>Currency Exchanger</div> }
+
+    <ConverterStyle >        
         <div className="amount">
-            <Input type='number' onChange={(e: number) => e <= 0 ? [setAmount(e), setResult(0), setDisableForm(true)] : [setAmount(e), setResult(0), setDisableForm(false)]} placeholder='Enter Amount' label='Amount' value={amount}/>
+            <Input disabled={fromCurrency ||  toCurrency} type='number' onChange={(e: number) => e <= 0 ? [setAmount(e), setResult(0), setDisableForm(true)] : [setAmount(e), setResult(0), setDisableForm(false)]} placeholder='Enter Amount' label='Amount' value={amount}/>
             <div className="inRes">{amount} {' '} {from} = {result > 0 && <>{result} {' '} {to}</>}</div>
         </div>
         <div className="details">
@@ -126,22 +144,25 @@ export default function Converter(props: any) {
                     ))}
                     </select>
                 </div>
-                <div className="swap" onClick={() => swap()}>Swap</div>
+                {!fromCurrency && <div className="swap" onClick={() => swap()}>Swap</div>}
                 <div>
                     <div className="label">To</div>
-                    <select onChange={(e) => setTo(e.target.value)} value={to} disabled={disableForm}>
+                    <select onChange={(e) => setTo(e.target.value)} value={to} disabled={disableForm && !toCurrency}>
                         {symbols.map((symbol: string) => (
                         <option key={symbol} value={symbol}>{symbol}</option>
                         ))}
                     </select>
                 </div>
             </div>
-            <div className="but" onClick={() => convertCurrency()}><Button disabled={disableForm}>Convert</Button></div>
+            <div className="but" onClick={() => convertCurrency()}><Button disabled={(disableForm && !toCurrency) || toCurrency === to}>Convert</Button></div>
             <div className="foot">
                 <div className="result">{result} {' '} {to}</div>
-                <div className="more"><div className="but"><Button disabled={disableForm}>More Details</Button></div></div>
+                <div className="more"><div className="but">
+                {!fromCurrency && <Link style={{textDecoration: 'none'}} to={`/details/${from}/${to}/${amount}`} ><Button disabled={disableForm}>More Details</Button></Link>}
+                </div></div>
             </div>
         </div>
     </ConverterStyle>
+    </>
   );
 }

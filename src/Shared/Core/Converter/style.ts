@@ -2,6 +2,12 @@ import styled from 'styled-components';
 
 export const ConverterStyle = styled.div`
 
+    .title {
+        color: white;
+        font-size: 30px;
+        margin-bottom: 50px;
+    }
+
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -70,4 +76,12 @@ export const ConverterStyle = styled.div`
         cursor: pointer;
         font-weight: 700;
     }
+    /* 
+    .sub {
+        color: white;
+        font-size: 16px;
+        margin-bottom: 50px;
+        font-weight: 500;
+    } */
+    
 `;

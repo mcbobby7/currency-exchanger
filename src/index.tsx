@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/details/:from/:to",
+    path: "/details/:fromCurrency/:toCurrency/:toAmount",
     element: <Details />,
   },
 ]);

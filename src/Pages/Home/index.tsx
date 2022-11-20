@@ -15,7 +15,7 @@ function HomePage() {
     <>
         <Header />
         <Home>
-            <div className='title'>Currency Exchanger</div> 
+            {/* <div className='title'>Currency Exchanger</div>  */}
             <Converter setRecent={(recent: any) => setRecent(recent)}/>
             
             <div className='cards'>
