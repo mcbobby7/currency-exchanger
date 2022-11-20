@@ -1,10 +1,15 @@
 import React from "react"
 import { ButtonStyle } from "./style"
 
-function Button(props: any) {
+interface ButtonProps {
+  disabled?: boolean,
+  children: React.ReactElement | string
+}
+
+const Button: React.FC<ButtonProps> = ({disabled, children}) => {
   return (
     <ButtonStyle>
-      <button disabled={props.disabled}>{props.children}</button>
+      <button disabled={disabled}>{children}</button>
     </ButtonStyle>
   )
 }

@@ -1,12 +1,19 @@
 import React from "react"
 import { CardStyle } from "./style"
 
-export default function Card(props: any) {
+interface CardProps {
+  name: string,
+  sub: string
+}
+
+const Card: React.FC<CardProps> = ({name, sub})=>{
   return (
     <CardStyle>
       <div className="container">
-        {props.name} ({props.sub})
+        {name} ({sub})
       </div>
     </CardStyle>
   )
 }
+
+export default Card

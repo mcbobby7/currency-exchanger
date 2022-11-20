@@ -1,19 +1,28 @@
 import React from "react"
 import { InputStyle } from "./style"
 
-function TextInput(props: any) {
+interface InputProps {
+  disabled: boolean,
+  value: number | string,
+  type: string,
+  placeholder: string,
+  label: string,
+  onChange: any
+}
+
+const TextInput: React.FC<InputProps> = ({disabled, value, type, placeholder, onChange, label}) => {
   return (
     <InputStyle>
       <input
-        disabled={props.disabled}
-        value={props.value}
-        type={props.type}
+        disabled={disabled}
+        value={value}
+        type={type}
         id="input"
         className="input-text"
-        placeholder={props.placeholder}
-        onChange={(e) => props.onChange(e.target.value)}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
       />
-      <label className="Input-label">{props.label}</label>
+      <label className="Input-label">{label}</label>
     </InputStyle>
   )
 }

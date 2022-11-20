@@ -12,7 +12,6 @@ function DetailsPage() {
     <>
       <Header />
       <Details>
-        {/* <div className='title'>Currency Exchanger</div>  */}
         <Converter setRecent={(recent: any) => setRecent(recent)} />
 
         <div className="chart">

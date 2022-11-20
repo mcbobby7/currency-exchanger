@@ -7,15 +7,9 @@ import { take, map } from "rxjs/operators"
 import { Link, useParams } from "react-router-dom"
 
 interface ConvertResponse {
-  date: string
-  historical: string
-  info: {}
-  query: {}
-  result: number
-  success: boolean
+  setRecent: React.MouseEventHandler<HTMLButtonElement>
 }
-
-export default function Converter(props: any) {
+const Converter: React.FC<ConvertResponse> = ({ setRecent }) => {
   const [to, setTo] = useState("USD")
   const [from, setFrom] = useState("EUR")
   const [amount, setAmount] = useState(1)
@@ -51,7 +45,7 @@ export default function Converter(props: any) {
     )
       .pipe(
         take(1),
-        map((res: ConvertResponse) => {
+        map((res: any) => {
           if (res.success) {
             return res
           } else {
@@ -102,7 +96,7 @@ export default function Converter(props: any) {
           if (res.success) {
             const data: any = Object.entries(res?.rates)
             setRecords(data)
-            props.setRecent(data.slice(0, 8))
+            setRecent(data.slice(0, 8))
 
             return Object.keys(Object.entries(res?.rates))
           } else {
@@ -185,7 +179,7 @@ export default function Converter(props: any) {
       <ConverterStyle>
         <div className="amount">
           <Input
-            disabled={fromCurrency || toCurrency}
+            disabled={fromCurrency || toCurrency ? true : false}
             type="number"
             onChange={(e: number) =>
               e <= 0
@@ -270,3 +264,5 @@ export default function Converter(props: any) {
     </>
   )
 }
+
+export default Converter

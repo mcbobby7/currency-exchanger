@@ -30,10 +30,12 @@ const options = {
   },
 }
 
-export default function Chart(props: any) {
-  const [startDate] = useState("2021-11-20")
-  const [endDate] = useState("2022-11-20")
-  const [res, setRes] = useState(0)
+interface ChartProps {}
+
+const Chart: React.FC<ChartProps> = () => {
+  const [startDate] = useState<string>("2021-11-20")
+  const [endDate] = useState<string>("2022-11-20")
+  const [res, setRes] = useState<number>(0)
   //   const [label, setLabel] = useState<any>([])
   const [data, setData] = useState<any>()
 
@@ -62,18 +64,14 @@ export default function Chart(props: any) {
         let date: any = moment().subtract(1, "months")
         console.log(moment(date._d).format("YYYY-MM-DD"))
         console.log(moment(date._d).format("MMMM"))
-        let label: any = []
-        let dates: any = []
+        let label: string[] = []
+        let dates: string[] = []
         for (let i = 0; i < 12; i++) {
           let date: any = moment().subtract(i, "months")
           label.push(moment(date._d).format("MMMM"))
           dates.push(moment(date._d).format("YYYY-MM-DD"))
         }
-        // setLabel(label)
         setRes(9)
-        // console.log(me);
-        // console.log(label);
-        console.log(Object.values(data.rates[dates[0]])[0])
         if (data.success) {
           setData({
             labels: label,
@@ -113,3 +111,5 @@ export default function Chart(props: any) {
     <>{data?.labels.length > 0 && <Bar key={res} options={options} data={data} />}</>
   )
 }
+
+export default Chart
