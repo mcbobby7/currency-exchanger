@@ -57,41 +57,40 @@ export default function Converter(props: any) {
         }; 
     }
 
-    useEffect(() => {                           
-        // convertCurrency()
-        // const subscription = ApiService.get(`/fixer/symbols`)
-        // .pipe(
-        //     take(1),
-        //     map((res: any) => {
-        //         console.log(res);
+    const getSymbols = () => {
+        const subscription1 = ApiService.get(`/fixer/symbols`)
+        .pipe(
+            take(1),
+            map((res: any) => {
+                console.log(res);
                 
-        //     if(res.success) {
-                // setRecords(res.)
-        //         return Object.keys(res.symbols);                                 
-        //         } else {                                   
-        //         return [];                                 
-        //         }
-        // })).subscribe((data: any) => {
-        //     // setEmployees(employees);   
-        //     setSymbols(data) 
-        //     console.log(data);
+            if(res.success) {
+                return Object.keys(res.symbols);                                 
+                } else {                                   
+                return [];                                 
+                }
+        })).subscribe((data: any) => {
+            // setEmployees(employees);   
+            setSymbols(data) 
+            console.log(data);
                                      
-        // });                           
-        
-        // return () => {
-        //     subscription.unsubscribe();                           
-        // }; 
+        });  
+        return () => {
+            subscription1.unsubscribe();                         
+        }; 
+    }
 
+    const getLatest = () => {
         const subscription = ApiService.get(`/fixer/latest?base=${from}`)
         .pipe(
             take(1),
             map((res: any) => {                
             if(res.success) {
-                const data: any = Object.entries(res.rates)
+                const data: any = Object.entries(res?.rates)
                 setRecords(data)
                 props.setRecent(data.slice(0,8))
                 
-                return Object.keys(res.symbols);                                 
+                return Object.keys(Object.entries(res?.rates));                                 
                 } else {                                   
                 return [];                                 
                 }
@@ -101,9 +100,14 @@ export default function Converter(props: any) {
         });                           
         
         return () => {
-            subscription.unsubscribe();                           
+            subscription.unsubscribe();  
         }; 
-                             
+    }
+
+    useEffect(() => {                           
+        // convertCurrency()
+        // getSymbols()                       
+        // getLatest()                    
         }, []);
 
   return (

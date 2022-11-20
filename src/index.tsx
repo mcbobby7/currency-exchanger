@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Home from './Pages/Home';
+import Details from './Pages/Details';
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <Home />,
   },
+  {
+    path: "/details/:from/:to",
+    element: <Details />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(
@@ -24,8 +29,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <GlobalStyle />
-    <Header />
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
   </React.StrictMode>
 );
 

@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import { Home } from './style'
+import { Details } from './style'
 
 import Card from '../../Shared/Components/Card'
 import Converter from '../../Shared/Core/Converter'
 import Header from '../../Shared/Core/Header';
 
 
-function HomePage() {
+function DetailsPage() {
 
     const [recent, setRecent] = useState([])
 
@@ -14,20 +14,18 @@ function HomePage() {
   return (
     <>
         <Header />
-        <Home>
+        <Details>
             <div className='title'>Currency Exchanger</div> 
             <Converter setRecent={(recent: any) => setRecent(recent)}/>
             
-            <div className='cards'>
+            <div className='chart'>
             
-                {recent.map((e: any) => (
-                    <Card key={e[0]} name={e[0]} sub={e[1]}/>
-                ))}
                 
             </div>
-        </Home>
+        </Details>
     </>
+    
   );
 }
 
-export default HomePage;
+export default DetailsPage;
