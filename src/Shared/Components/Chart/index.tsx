@@ -104,7 +104,7 @@ const Chart: React.FC<ChartProps> = () => {
   }
 
   useEffect(() => {
-    getHistory()
+    // getHistory()
   }, [fromCurrency, toCurrency, toAmount])
 
   return (

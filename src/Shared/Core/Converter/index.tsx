@@ -5,6 +5,7 @@ import Input from "../../Components/TextBox"
 import { ApiService } from "../Services"
 import { take, map } from "rxjs/operators"
 import { Link, useParams } from "react-router-dom"
+import Loader from "../../Components/Loader"
 
 interface ConvertResponse {
   setRecent: React.MouseEventHandler<HTMLButtonElement>
@@ -16,6 +17,7 @@ const Converter: React.FC<ConvertResponse> = ({ setRecent }) => {
   const [result, setResult] = useState(0)
   const [, setRecords] = useState([])
   const [disableForm, setDisableForm] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [symbols, setSymbols] = useState([
     "uar",
     "mrx",
@@ -38,8 +40,7 @@ const Converter: React.FC<ConvertResponse> = ({ setRecent }) => {
     setFrom(toCurrency)
   }
   const convertCurrency = () => {
-    console.log(`/fixer/convert?to=${to}&from=${from}&amount=${amount}`)
-
+    setLoading(true)
     const subscription = ApiService.get(
       `/fixer/convert?to=${to}&from=${from}&amount=${amount}`
     )
@@ -54,7 +55,7 @@ const Converter: React.FC<ConvertResponse> = ({ setRecent }) => {
         })
       )
       .subscribe((res: any) => {
-        console.log(res)
+        setLoading(false)
         setResult(res.result)
       })
 
@@ -141,11 +142,10 @@ const Converter: React.FC<ConvertResponse> = ({ setRecent }) => {
   }
 
   useEffect(() => {
-    convertCurrency()
-    getSymbols()
-    getLatest()
+    // convertCurrency()
+    // getSymbols()
+    // getLatest()
 
-    console.log("from", fromCurrency, toCurrency)
     if (fromCurrency || toCurrency) {
       setDisableForm(true)
       setFrom(fromCurrency as string)
@@ -237,11 +237,26 @@ const Converter: React.FC<ConvertResponse> = ({ setRecent }) => {
               </select>
             </div>
           </div>
-          <div className="but" onClick={() => convertCurrency()}>
-            <Button disabled={(disableForm && !toCurrency) || toCurrency === to}>
-              Convert
-            </Button>
-          </div>
+          {!toCurrency && (
+            <div className="but" onClick={() => convertCurrency()}>
+              <Button disabled={(disableForm && !toCurrency) || toCurrency === to}>
+                Convert
+              </Button>
+            </div>
+          )}
+
+          {toCurrency && (
+            <div className="but">
+              <Link
+                style={{ textDecoration: "none" }}
+                to={`/details/${from}/${to}/${amount}`}
+              >
+                <Button disabled={(disableForm && !toCurrency) || toCurrency === to}>
+                  Convert
+                </Button>
+              </Link>
+            </div>
+          )}
           <div className="foot">
             <div className="result">
               {result} {to}
@@ -260,6 +275,7 @@ const Converter: React.FC<ConvertResponse> = ({ setRecent }) => {
             </div>
           </div>
         </div>
+        {loading && <Loader />}
       </ConverterStyle>
     </>
   )

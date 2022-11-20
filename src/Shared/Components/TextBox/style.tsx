@@ -33,8 +33,8 @@ export const InputStyle = styled.div`
   label {
     display: block;
     position: absolute;
-    bottom: 100%;
-    left: 0.5rem;
+    bottom: 120%;
+    left: 0.2rem;
     color: #fff;
     font-family: inherit;
     font-size: var(--inputFontSize);
