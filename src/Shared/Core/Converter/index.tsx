@@ -47,11 +47,7 @@ const Converter: React.FC<ConvertResponse> = ({ setRecent }) => {
       .pipe(
         take(1),
         map((res: any) => {
-          if (res.success) {
-            return res
-          } else {
-            return null
-          }
+          return res
         })
       )
       .subscribe((res: any) => {
@@ -69,8 +65,6 @@ const Converter: React.FC<ConvertResponse> = ({ setRecent }) => {
       .pipe(
         take(1),
         map((res: any) => {
-          console.log(res)
-
           if (res.success) {
             setMainSymbols(res.symbols)
             return Object.keys(res.symbols)
@@ -82,7 +76,6 @@ const Converter: React.FC<ConvertResponse> = ({ setRecent }) => {
       .subscribe((data: any) => {
         // setEmployees(employees);
         setSymbols(data)
-        console.log(data)
       })
     return () => {
       subscription1.unsubscribe()
@@ -105,9 +98,7 @@ const Converter: React.FC<ConvertResponse> = ({ setRecent }) => {
           }
         })
       )
-      .subscribe((data: any) => {
-        console.log(data)
-      })
+      .subscribe((data: any) => {})
 
     return () => {
       subscription.unsubscribe()
@@ -125,19 +116,23 @@ const Converter: React.FC<ConvertResponse> = ({ setRecent }) => {
     }
 
     setTo(e.target.value)
-    if (e.target.value === from && e.target.value === symbols[0]) {
-      setFrom(symbols[1])
-    } else {
-      setFrom(symbols[0])
+    if (e.target.value === from) {
+      if (e.target.value === symbols[0]) {
+        setFrom(symbols[1])
+      } else {
+        setFrom(symbols[0])
+      }
     }
   }
 
   const setFromF = (e: any) => {
     setFrom(e.target.value)
-    if (e.target.value === to && e.target.value === symbols[0]) {
-      setTo(symbols[1])
-    } else {
-      setTo(symbols[0])
+    if (e.target.value === to) {
+      if (e.target.value === symbols[0]) {
+        setTo(symbols[1])
+      } else {
+        setTo(symbols[0])
+      }
     }
   }
 

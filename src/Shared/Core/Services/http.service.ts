@@ -8,16 +8,16 @@ export const convert = async (to: string, from: string, amount: number) => {
       )
         .pipe(
           take(1),
-          map((res: any) => {
+          map( async(res: any) => {
             if (res.success) {
-              return res
+              return await res
             } else {
               return null
             }
           })
         )
-        .subscribe((res: any) => {
-            return res
+        .subscribe( async(res: any) => {
+            return await res
         })
   
       return () => {

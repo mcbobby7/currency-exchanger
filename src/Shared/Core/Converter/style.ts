@@ -58,7 +58,7 @@ export const ConverterStyle = styled.div`
     }
     .but {
       width: 100%;
-      margin: 20px auto;
+      margin: 30px auto;
     }
     .foot {
       display: flex;

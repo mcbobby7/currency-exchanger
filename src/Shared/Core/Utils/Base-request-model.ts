@@ -1,7 +1,8 @@
 import { Observable } from "rxjs"
 import { Method, _Headers, Body } from "./Types"
+import axios from 'axios'
 
-const baseUrl = "https://api.apilayer.com"
+const baseUrl = `${process.env.REACT_APP_BASE_URL}`
 export default class BaseRequestModel {
   constructor(
     private url: string,
@@ -15,22 +16,33 @@ export default class BaseRequestModel {
     this.body = body
   }
 
-  request(): Observable<any> {
+  request (): Observable<any> {
     return new Observable((observer) => {
-      fetch(`${baseUrl}${this.url}`, {
+
+      // try {
+      //   const res: any = await axios.get(`API_URL`, {
+      //     headers: {},
+      //     params: {}
+      //   });
+      // } catch (err) {
+      //   console.log(err);
+      // }
+
+
+      axios.get(`${baseUrl}${this.url}`, {
         method: this.method,
-        body: this.body,
         headers: this.headers,
       })
-        .then((r: any) => {
-          return r.json()
+        .then((r: any) => {          
+          return r.data
         })
-        .then((data: any) => {
+        .then((data: any) => {          
           observer.next(data)
           observer.complete()
         })
         .catch((e: any) => {
           observer.error(e)
+
         })
       return () => {
         // clean up on unsubscribe
