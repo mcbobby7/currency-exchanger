@@ -45,7 +45,6 @@ const Converter: React.FC<ConvertResponse> = ({ setRecent }) => {
       .subscribe((res: any) => {
         setLoading(false)
         setResult(res.result)
-        console.log(res)
       })
 
     return () => {
