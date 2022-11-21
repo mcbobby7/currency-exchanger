@@ -18,15 +18,7 @@ const Converter: React.FC<ConvertResponse> = ({ setRecent }) => {
   const [, setRecords] = useState([])
   const [disableForm, setDisableForm] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [symbols, setSymbols] = useState([
-    "uar",
-    "mrx",
-    "hde",
-    "she",
-    "sha",
-    "USD",
-    "EUR",
-  ])
+  const [symbols, setSymbols] = useState([])
   const [mainSymbols, setMainSymbols] = useState<any>({})
 
   const { fromCurrency, toCurrency, toAmount } = useParams()
@@ -53,6 +45,7 @@ const Converter: React.FC<ConvertResponse> = ({ setRecent }) => {
       .subscribe((res: any) => {
         setLoading(false)
         setResult(res.result)
+        console.log(res)
       })
 
     return () => {

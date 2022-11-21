@@ -57,7 +57,7 @@ const Chart: React.FC<ChartProps> = () => {
       )
       .subscribe((data: any) => {
         // let date: any = moment().subtract(1, "months")
-        let yesterday: any = moment().subtract(1, 'day')
+        let yesterday: any = moment().subtract(1, "day")
         let label: string[] = []
         let dates: string[] = []
         for (let i = 0; i < 12; i++) {
@@ -66,14 +66,16 @@ const Chart: React.FC<ChartProps> = () => {
           dates.push(moment(date._d).format("YYYY-MM-DD"))
         }
         setRes(9)
-        if (data.success) {          
+        if (data.success) {
           setData({
             labels: label,
             datasets: [
               {
                 label: fromCurrency,
                 data: [
-                  Object.values(data.rates[moment(yesterday._d).format("YYYY-MM-DD")])[0],
+                  Object.values(
+                    data.rates[moment(yesterday._d).format("YYYY-MM-DD")]
+                  )[0],
                   Object.values(data.rates[dates[1]])[0],
                   Object.values(data.rates[dates[2]])[0],
                   Object.values(data.rates[dates[3]])[0],
@@ -101,9 +103,7 @@ const Chart: React.FC<ChartProps> = () => {
     getHistory()
   }, [fromCurrency, toCurrency, toAmount])
 
-  return (
-    <>{data?.labels && <Bar key={res} options={options} data={data} />}</>
-  )
+  return <>{data?.labels && <Bar key={res} options={options} data={data} />}</>
 }
 
 export default Chart
