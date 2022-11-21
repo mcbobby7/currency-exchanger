@@ -32,6 +32,11 @@ export const HeaderStyle = styled.div`
         width: 150px;
         margin: 0 10px;
       }
+
+      @media only screen and (max-width: 600px) {
+      display: none;
+      
+    }
     }
   }
 `

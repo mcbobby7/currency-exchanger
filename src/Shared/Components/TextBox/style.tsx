@@ -2,14 +2,13 @@ import styled from "styled-components"
 
 export const InputStyle = styled.div`
   position: relative;
-  width: 200px;
+  width: 300px;
 
   input {
-    display: block;
+    /* display: block; */
     margin: 0;
-    padding: var(--inputPaddingV) var(--inputPaddingH);
     color: inherit;
-    width: 100%;
+    width: 300px;
     height: 35px;
     font-family: inherit;
     font-size: var(--inputFontSize);

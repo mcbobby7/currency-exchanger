@@ -9,12 +9,14 @@ export const Home = styled.div`
   }
   .cards {
     display: flex;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     justify-content: space-between;
-    margin-top: 70px;
+    margin: 0 auto;
+    padding-top: 50px;
     > * {
       margin: 10px;
-      width: 250px;
+      min-width: 100px;
+      flex: 0 1 20%;
     }
   }
 `

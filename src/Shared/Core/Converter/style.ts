@@ -1,30 +1,41 @@
 import styled from "styled-components"
 
 export const ConverterStyle = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  border: none;
+
   .title {
     color: white;
     font-size: 30px;
     margin-bottom: 50px;
   }
-
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  border: none;
   .amount {
     width: 50%;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     .inRes {
-      width: 100%;
+      width: 320px;
       padding: 10px;
       border: 1px solid #45a29e;
       color: white;
       display: flex;
       align-items: center;
-      width: 60%;
       justify-content: center;
+    }
+    @media only screen and (max-width: 800px) {
+      width: 100%;
+      height: 150px;
+      margin-bottom: 50px;
+      justify-content: space-between;
+
+      > * {
+        width: 320px;
+        /* margin: auto; */
+        margin-bottom: 20px;
+      }
     }
   }
   .details {
@@ -68,6 +79,18 @@ export const ConverterStyle = styled.div`
       width: 40%;
       margin: 0 20px;
     }
+    @media only screen and (max-width: 800px) {
+      width: 100%;
+      height: 150px;
+      margin-bottom: 50px;
+      justify-content: space-between;
+
+      > * {
+        width: 320px;
+        /* margin: auto; */
+        margin-bottom: 20px;
+      }
+    }
   }
   .swap {
     color: #45a29e;
@@ -75,11 +98,7 @@ export const ConverterStyle = styled.div`
     cursor: pointer;
     font-weight: 700;
   }
-  /* 
-    .sub {
-        color: white;
-        font-size: 16px;
-        margin-bottom: 50px;
-        font-weight: 500;
-    } */
+  @media only screen and (max-width: 800px) {
+    flex-direction: column;
+  }
 `

@@ -4,8 +4,17 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    background-color: #1F2833;
+    background-color: #0B0C10;
     font-family: Open-Sans, Helvetica, Sans-Serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #root {
+    background-color: #1F2833;
+    width: 100vw;
+    max-width: 1200px;
+    min-height: 100vh;
   }
   select {
 
@@ -17,7 +26,6 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.5em;
     padding: 0.5em 3.5em 0.5em 1em;
     width: 150px;
-
     margin: 0;      
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -26,6 +34,10 @@ const GlobalStyle = createGlobalStyle`
     -moz-appearance: none;
     border: none;
     outline: none;
+    @media only screen and (max-width: 500px) {
+      width: 100px;
+      
+    }
 }
 
 select.round {

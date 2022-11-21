@@ -142,9 +142,9 @@ const Converter: React.FC<ConvertResponse> = ({ setRecent }) => {
   }
 
   useEffect(() => {
-    // convertCurrency()
-    // getSymbols()
-    // getLatest()
+    convertCurrency()
+    getSymbols()
+    getLatest()
 
     if (fromCurrency || toCurrency) {
       setDisableForm(true)
